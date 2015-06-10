@@ -1,0 +1,13 @@
+Flask==0.10.1
+Jinja2==2.7.3
+MarkupSafe==0.23
+PyYAML==3.11
+Werkzeug==0.10.1
+argparse==1.3.0
+grizzled-python==1.0.1
+itsdangerous==0.24
+pbr==0.10.8
+prettytable==0.7.2
+qiniu==7.0.3
+requests==2.6.0
+sae-python-dev==1.3.2

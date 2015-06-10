@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PicBed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="demonstration,demo,jquery,blocksit.js,css3,dynamic,grid,layout,inwebson"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+	<h1>分享你的世界</h1>
+	<div id="backlinks">
+{#        <a href="{{ url_for('upQiniu') }}">#}
+{#		    <button type="button" class="btn btn-default">上传图片</button>#}
+{#        </a>#}
+        <a class="btn btn-default view_code" id="show_code">
+            上传图片
+        </a>
+        <input type="hidden" id="domain" value="{{ domain }}">
+        <input type="hidden" id="uptoken_url" value="/uptoken">
+	</div>
+	<div class="clearfix"></div>
+</header>
+<!-- Content -->
+<section id="wrapper">
+	<hgroup>
+		<h2>Sharing change the world！</h2> 
+		<h3></h3>
+	</hgroup>
+    <div id="contain">
+        {% for item in data %}
+            <div class="grid" data-key="{{ item['key'] }}">
+                <div class="imgholder">
+                    <a class="fopLink" data-key="{{ item['upkey'] }}">
+                        <img class="img_load" src="{{ item['url'] }}" />
+                    </a>
+                </div>
+                <span class="stop"></span>
+                <strong>{{ item['object'] }}</strong>
+                <div class="description">
+                    <p>{{ item['words'] }}</p>
+                    <div class="meta">by {{ item['author'] }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+    <div class="modal fade body upload-img" id="myModal-code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">文件上传</h4>
+          </div>
+          <div class="modal-body">
+              <div class="text-left col-md-12 wrapper">
+                  <ul class="tip col-md-12 text-mute">
+                      <li>
+                          <small>大于4M文件采用分块上传。</small>
+                      </li>
+                      <li>
+                          <small>上传图片可查看处理效果。</small>
+                      </li>
+                      <li>
+                          <small>最大上传文件100M。</small>
+                      </li>
+                  </ul>
+              </div>
+              <div class="body">
+                  <div class="col-md-12">
+                      <div id="container">
+                          <a class="btn btn-default btn-lg " id="pickfiles" href="#">
+                              <i class="glyphicon glyphicon-plus"></i>
+                              <sapn>选择文件</sapn>
+                          </a>
+                      </div>
+                  </div>
+                  <div style="display:none" id="success" class="col-md-12">
+                      <div class="alert-success">
+                          文件上传完毕
+                      </div>
+                  </div>
+                  <div class="col-md-12 ">
+                      <table class="table table-striped table-hover text-left" style="margin-top:40px;display:none">
+                          <thead>
+                          <tr>
+                              <th class="col-md-4">Filename</th>
+                              <th class="col-md-2">Size</th>
+                              <th class="col-md-6">Detail</th>
+                          </tr>
+                          </thead>
+                          <tbody id="fsUploadProgress">
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade body view-img" id="myModal-img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">预览</h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-body-wrapper text-center">
+                <img src="" alt="" data-key="" data-h="">
+            </div>
+            <div class="modal-body-footer">
+                <div class="watermark">
+                    <span>水印：</span>
+                    <a href="#" data-watermark="NorthWest" class="btn btn-default">
+                        左上
+                    </a>
+                    <a href="#" data-watermark="SouthWest" class="btn btn-default">
+                        左下
+                    </a>
+                    <a href="#" data-watermark="NorthEast" class="btn btn-default">
+                        右上
+                    </a>
+                    <a href="#" data-watermark="SouthEast" class="btn btn-default">
+                        右下
+                    </a>
+                    <a href="#" data-watermark="false" class="btn btn-default">
+                        无
+                    </a>
+                </div>
+                 <div class="imageView2">
+                    <span>缩略：</span>
+                    <a href="#" data-imageview="large" class="btn btn-default disabled">
+                        大
+                    </a>
+                    <a href="#" data-imageview="middle" class="btn btn-default">
+                        中
+                    </a>
+                    <a href="#" data-imageview="small" class="btn btn-default">
+                        小
+                    </a>
+                </div>
+                <div class="imageMogr2">
+                    <span>旋转：</span>
+                    <a href="#" data-imagemogr="left" class="btn btn-default no-disable-click" >
+                        逆时针
+                    </a>
+                    <a href="#" data-imagemogr="right" class="btn btn-default no-disable-click">
+                        顺时针
+                    </a>
+                    <a href="#" data-imagemogr="no-rotate" class="btn btn-default">
+                        无
+                    </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+<div id="loading" class="loading">
+    <img id="load_img" src="/static/img/loading2.gif">
+    <span id="load_text">正在加载...</span>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/js/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="/static/js/ui.js"></script>
+<script type="text/javascript" src="/static/js/qiniu.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script type="text/javascript" src="/static/js/blocksit.js"></script>
+</html>

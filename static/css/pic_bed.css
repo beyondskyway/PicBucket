@@ -1,0 +1,249 @@
+body{
+	margin:0;
+	padding:0;
+	background:url(/static/img/bg.gif) 0 0 repeat #f7f5f5;
+	color:#333;
+	/*font-family:Cambria, Georgia, serif;*/
+	font-size:15px;
+	overflow-x:hidden;
+}
+header, section, footer, hgroup{
+	display:block;
+}
+a {
+	color:#35BFFF;
+	text-decoration:none;
+}
+a:hover, a:active{
+	color:#91DCFF;
+}
+
+/* Header */
+#header{
+	width:100%;
+	background:#000;
+	background:rgba(0, 0, 0, 0.8);
+	padding:5px 0;
+	letter-spacing:1px;
+	margin-bottom:20px;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:99;
+}
+#header h1{
+	padding:0 20px;
+	margin:5px 0;
+	text-shadow:2px 1px 1px #333, 2px 2px 1px #888;
+	color:#EAEAEA;
+	float:left;
+	font-size:27px;
+}
+#backlinks{
+	float:right;
+	padding:0 20px;
+	line-height:22px;
+	font-weight:bold;
+	font-size:13px;
+}
+#backlinks a{
+	text-align:right;
+	display:block;
+}
+
+/* Footer */
+#footer{
+	width:100%;
+	position:fixed;
+	padding-left:20px;
+	bottom:0;
+	left:0;
+	line-height:20px;
+	color:#888;
+	font-size:13px;
+	background:rgb(0, 0, 0);
+	background:rgba(0, 0, 0, 0.8);
+	z-index:99;
+}
+#footer span{
+	display:block;
+}
+
+/* clearfix */
+.clearfix {
+	clear:both;
+}
+
+/* wrapper css */
+#wrapper{
+	margin-top:70px;
+	width:100%;
+}
+#wrapper hgroup{
+	text-align:center;
+}
+#wrapper h2{
+	margin:5px 0;
+	color:#FF6D99;
+	text-shadow:1px 1px 2px #A50031;
+	font-size:33px;
+	font-family:Arial Narrow, Arial, sans-serif;
+}
+#wrapper h3{
+	font-style:italic;
+	font-weight:normal;
+	font-size:18px;
+	text-shadow:1px 1px 0 #fff;
+	color:#888;
+	margin:5px 0;
+}
+
+#contain{
+	position:relative;
+	width:1500px;
+	margin:0 auto 25px;
+	padding-bottom: 10px;
+
+}
+.grid{
+	width:234px;
+	min-height:100px;
+	padding: 0px;
+	background:#fff;
+	margin:8px;
+	font-size:12px;
+	float:left;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	
+	-webkit-transition: top 1s ease, left 1s ease;
+	-moz-transition: top 1s ease, left 1s ease;
+	-o-transition: top 1s ease, left 1s ease;
+	-ms-transition: top 1s ease, left 1s ease;
+}
+
+.grid strong {
+	border-bottom:1px solid #ccc;
+	margin:10px 0 0;
+	display:block;
+	padding:0 16px 5px;
+	font-size:17px;
+}
+
+@media screen and (max-width: 768px){
+    .grid strong{
+        padding: 0 5px 5px;
+        font-size: 13px;
+    }
+}
+.grid .description{
+	border-top: 1px solid #F2F2F2;
+    background: #FAFAFA;
+    position: relative;
+    padding: 0 15px 10px 15px;
+}
+
+.grid .meta{
+	color:#777;
+	font-style:italic;
+	text-align:right;
+}
+
+.grid .imgholder{
+	max-height:800px;
+	overflow:hidden;
+}
+
+.grid .imgholder img{
+	max-width:100%;
+	background:#ccc;
+	display:block;
+	margin:0 auto;
+}
+
+.grid .stop {
+	margin-top: -10px;
+	display: none;
+	z-index: 1;
+	width: 100%;
+	height: 12px;
+	left: 0;
+	/* bottom: 0; */
+	background: url(/static/img/long_image_shadow.png) repeat-x 4px top;
+	position: absolute;
+}
+
+@media screen and (max-width : 1240px) {
+	body{
+		overflow:auto;
+	}
+}
+@media screen and (max-width : 900px) {
+	#backlinks{
+		float:right;
+		/*clear:both;*/
+	}
+	#backlinks a{
+		display:inline-block;
+		padding-right:20px;
+	}
+	#wrapper{
+		margin-top:90px;
+	}
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+.btn-lg, .btn-group-lg>.btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.loading {
+	display: none;
+	margin-bottom: 15px;
+	padding: 15px 0;
+	text-align: center;
+	font-weight: 700;
+	border: double rgba(34,25,25,.14);
+	border-width: 3px 0 0 0;
+}
+
+.loading span {
+  font-size: 1.6em;
+}

@@ -17,25 +17,47 @@
 
 <!-- Header -->
 <header id="header">
-	<h1>分享你的世界</h1>
 	<div id="backlinks">
-{#        <a href="{{ url_for('upQiniu') }}">#}
-{#		    <button type="button" class="btn btn-default">上传图片</button>#}
-{#        </a>#}
-        <a class="btn btn-default view_code" id="show_code">
-            上传图片
-        </a>
         <input type="hidden" id="domain" value="{{ domain }}">
         <input type="hidden" id="uptoken_url" value="/uptoken">
 	</div>
 	<div class="clearfix"></div>
 </header>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img class="img_logo" src="/static/img/logo.jpg">
+        </a>
+        <a class="navbar-brand" href="#">Sky</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">最新<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">美图</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="img_logo" src="/static/img/logo.jpg"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a id="show_upload" href="#">上传图片</a></li>
+            <li><a href="#">我的Sky</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">退出</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <!-- Content -->
 <section id="wrapper">
-	<hgroup>
-		<h2>Sharing change the world！</h2> 
-		<h3></h3>
-	</hgroup>
     <div id="contain">
         {% for item in data %}
             <div class="grid" data-key="{{ item['key'] }}">
@@ -59,48 +81,32 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">文件上传</h4>
+            <h4 class="modal-title" id="myModalLabel">上传图片</h4>
           </div>
           <div class="modal-body">
-              <div class="text-left col-md-12 wrapper">
-                  <ul class="tip col-md-12 text-mute">
-                      <li>
-                          <small>大于4M文件采用分块上传。</small>
-                      </li>
-                      <li>
-                          <small>上传图片可查看处理效果。</small>
-                      </li>
-                      <li>
-                          <small>最大上传文件100M。</small>
-                      </li>
-                  </ul>
-              </div>
               <div class="body">
-                  <div class="col-md-12">
-                      <div id="container">
-                          <a class="btn btn-default btn-lg " id="pickfiles" href="#">
-                              <i class="glyphicon glyphicon-plus"></i>
-                              <sapn>选择文件</sapn>
-                          </a>
-                      </div>
-                  </div>
-                  <div style="display:none" id="success" class="col-md-12">
-                      <div class="alert-success">
-                          文件上传完毕
-                      </div>
-                  </div>
                   <div class="col-md-12 ">
-                      <table class="table table-striped table-hover text-left" style="margin-top:40px;display:none">
-                          <thead>
-                          <tr>
-                              <th class="col-md-4">Filename</th>
-                              <th class="col-md-2">Size</th>
-                              <th class="col-md-6">Detail</th>
-                          </tr>
-                          </thead>
-                          <tbody id="fsUploadProgress">
-                          </tbody>
-                      </table>
+                      <ul>
+                          <li>
+                              <input type="text" name="post_title" id="post-title" class="regular-text large" placeholder="在此输入标题" required="">
+                          </li>
+                          <li>
+                              <textarea name="post_description" id="post_description" class="regular-text large" placeholder="在此输入图片描述 #作者#" required=""></textarea>
+                          </li>
+                          <li>
+                              <div id="container" style="position: relative;">
+                                  <a class="upload-button" id="pickfiles" href="#">
+                                      <i class="glyphicon glyphicon-picture"></i>
+                                      <sapn>选择文件</sapn>
+                                  </a>
+                                  <div id="upload-file-list">
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="submit-block">
+                              <input id="photo_submit" class="post-submit regular-button" type="submit" name="submit" value="确认上传">
+                          </li>
+                      </ul>
                   </div>
               </div>
           </div>
@@ -178,6 +184,8 @@
 <script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
 <script type="text/javascript" src="/static/js/ui.js"></script>
 <script type="text/javascript" src="/static/js/qiniu.js"></script>
+<script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>
 <script type="text/javascript" src="/static/js/blocksit.js"></script>
+
 </html>

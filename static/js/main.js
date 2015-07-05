@@ -1,7 +1,6 @@
 /*global Qiniu */
 /*global plupload */
 /*global FileProgress */
-/*global hljs */
 
 var col;
 var isScroll = 0;
@@ -17,25 +16,30 @@ $(document).ready(function() {
 	$(window).load( function() {
         var winWidth = $(window).width();
 		var conWidth;
-        if(winWidth < 750) {
-            conWidth = winWidth;
-            col = 2;
-		} else if(winWidth < 1000) {
+        if(winWidth < 500) {
+			conWidth = winWidth;
+			col = 1;
+		} else if(winWidth < 850) {
 			conWidth = winWidth;
 			col = 2;
-		} else if(winWidth < 1250) {
-			conWidth = 1000;
+		} else if(winWidth < 1100) {
+			conWidth = 798;
+			col = 3;
+		} else if(winWidth < 1350) {
+			conWidth = 1064;
 			col = 4;
-		} else if(winWidth < 1500) {
-			conWidth = 1250;
+		} else if(winWidth < 1600) {
+			conWidth = 1330;
 			col = 5;
-		} else{
-            conWidth = 1500;
+		} else if(winWidth < 1850) {
+            conWidth = 1596;
 			col = 6;
+        } else {
+            conWidth = 1862;
+            col = 7;
         }
-
         $('#contain').width(conWidth);
-        $('#contain').BlocksIt({
+        $("#contain").BlocksIt({
             numOfCol: col,
             offsetX: 8,
             offsetY: 8,
@@ -44,36 +48,42 @@ $(document).ready(function() {
 	});
 
 	//window resize
-	var currentWidth = 1500;
+	var currentWidth = $(window).width();
 	$(window).resize(function() {
 		var winWidth = $(window).width();
 		var conWidth;
-        if(winWidth < 750) {
-            conWidth = winWidth;
-            col = 2;
-		} else if(winWidth < 1000) {
+        if(winWidth < 500) {
+			conWidth = winWidth;
+			col = 1;
+		} else if(winWidth < 850) {
 			conWidth = winWidth;
 			col = 2;
-		} else if(winWidth < 1250) {
-			conWidth = 1000;
+		} else if(winWidth < 1100) {
+			conWidth = 798;
+			col = 3;
+		} else if(winWidth < 1350) {
+			conWidth = 1064;
 			col = 4;
-		} else if(winWidth < 1500) {
-			conWidth = 1250;
+		} else if(winWidth < 1600) {
+			conWidth = 1330;
 			col = 5;
-		} else{
-            conWidth = 1500;
+		} else if(winWidth < 1850) {
+            conWidth = 1596;
 			col = 6;
+        } else {
+            conWidth = 1862;
+            col = 7;
         }
 
 		if(conWidth != currentWidth) {
 			currentWidth = conWidth;
 			$('#contain').width(conWidth);
-			$('#contain').BlocksIt({
-				numOfCol: col,
-				offsetX: 8,
-				offsetY: 8,
+            $("#contain").BlocksIt({
+                numOfCol: col,
+                offsetX: 8,
+                offsetY: 8,
                 blockElement: '.grid'
-			});
+            });
 		}
 	});
 });
@@ -113,7 +123,7 @@ $(window).scroll(function () {
     var clientHeight = $(window).height(),
         scrollTop = $(window).scrollTop(),
         scrollHeight = $(document).height();
-    if (!isScroll && (scrollHeight - clientHeight - scrollTop < 500)) {
+    if (!isScroll && (scrollHeight - clientHeight - scrollTop < 5000)) {
         isScroll = 1;
         $('#loading').show();
         // 获取最后一个块的key
@@ -135,7 +145,6 @@ $(window).scroll(function () {
             if(jQuery.isEmptyObject(pics)){
                 $('#load_img').hide();
                 $('#load_text').text('没有更多了！');
-                $('#contain').BlocksIt('reload');
                 return false;
             }
 
@@ -157,54 +166,17 @@ $(window).scroll(function () {
                 $("#contain").append(add);
                 // 动态加载渲染图片
                 img_stop();
-            });
-            $('#contain').BlocksIt('reload');
-            // 第二次加载
-            // 获取最后一个块的key
-            key = $('.grid:last-child').data('key');
-            // 请求数据
-            $.ajax({
-                url:"/picbed",
-                type: "POST",
-                data: { key: key}
-            })
-            .done(function(data){
-                if(data === 'error') {
-                    alert('加载失败');
-                    location.reload(true);
-                    return false;
-                }
-                var pics = JSON.parse(data);
-                //没有更多了
-                if(jQuery.isEmptyObject(pics)){
-                    $('#load_img').hide();
-                    $('#load_text').text('没有更多了！');
-                    $('#contain').BlocksIt('reload');
-                    return false;
-                }
-                $.each(pics, function(index, val){
-                    var add =
-                            "<div class='grid' data-key='" + this.key +"'>" +
-                                "<div class='imgholder'>" +
-                                    "<a class='fopLink' data-key='"+ this.upkey + "'>" +
-                                        "<img class='img_load' src='" + this.url +"' />" +
-                                    "</a>" +
-                                "</div>" +
-                                "<span class='stop'></span>" +
-                                "<strong>"+ this.object +"</strong>" +
-                                "<div class='description'>" +
-                                    "<p>"+ this.words +"</p>" +
-                                    "<div class='meta'>by " + this.author +"</div>" +
-                                "</div>"+
-                            "</div>";
-                    $("#contain").append(add);
-                    img_stop();
+                var str = 'div[data-key=' + this.key + ']';  // 选择器效率不高，换id可能更好
+                $(str).imagesLoaded().progress(function() {
+                    $("#contain").BlocksIt();
                 });
-                $('#loading').hide();
-                $('#contain').BlocksIt('reload');
-                isScroll = 0;
             });
-
+            // 避免初始加载时append未被BlocksIt渲染而闪现
+            if(scrollTop < 500){
+                $("#contain").BlocksIt();
+            }
+            $('#loading').hide();
+            isScroll = 0;
         });
     }
 });
@@ -241,53 +213,51 @@ $(function() {
         auto_start: true,
         init: {
             'FilesAdded': function(up, files) {
-                $('table').show();
-                $('#success').hide();
                 plupload.each(files, function(file) {
-                    var progress = new FileProgress(file, 'fsUploadProgress');
+                    var progress = new FileProgress(file, 'upload-file-list');
                     progress.setStatus("等待...");
                 });
             },
             'BeforeUpload': function(up, file) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
+                var progress = new FileProgress(file, 'upload-file-list');
                 var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
                 if (up.runtime === 'html5' && chunk_size) {
                     progress.setChunkProgess(chunk_size);
                 }
             },
             'UploadProgress': function(up, file) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
+                var progress = new FileProgress(file, 'upload-file-list');
                 var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
                 progress.setProgress(file.percent + "%", up.total.bytesPerSec, chunk_size);
 
             },
             'UploadComplete': function() {
-                $('#success').show();
+                return false;
             },
             'FileUploaded': function(up, file, info) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
+                var progress = new FileProgress(file, 'upload-file-list');
                 progress.setComplete(up, info);
                 var res = $.parseJSON(info);
                 // 请求后台存储
-                var domain = up.getOption('domain');
-                //url = domain + encodeURI(res.key);
-                var link = domain + res.key;
-                var key = res.key;
-                $.ajax({
-                    url:"/upQiniu",
-                    type: "POST",
-                    data: { key: key, url: link}
-                })
-                .done(function(data){
-                    if(data === 'error') {
-                        alert('上传失败');
-                        location.reload(true);
-                    }
-                });
+//                var domain = up.getOption('domain');
+//                //url = domain + encodeURI(res.key);
+//                var link = domain + res.key;
+//                var key = res.key;
+//                $.ajax({
+//                    url:"/upQiniu",
+//                    type: "POST",
+//                    data: { key: key, url: link}
+//                })
+//                .done(function(data){
+//                    if(data === 'error') {
+//                        alert('上传失败');
+//                        location.reload(true);
+//                    }
+//                });
             },
             'Error': function(up, err, errTip) {
                 $('table').show();
-                var progress = new FileProgress(err.file, 'fsUploadProgress');
+                var progress = new FileProgress(err.file, 'upload-file-list');
                 progress.setError();
                 progress.setStatus(errTip);
             }
@@ -295,14 +265,6 @@ $(function() {
             'Key': function(up, file) {
                 //当前时间戳
                 var key = new Date();
-//                Y = key.getFullYear() + '-';
-//                M = (key.getMonth()+1 < 10 ? '0'+(key.getMonth()+1) : key.getMonth()+1) + '-';
-//                D = (key.getDate() < 10 ? '0'+key.getDate() : key.getDate()) + ' ';
-//                h = (key.getHours() < 10 ? '0'+key.getHours() : key.getHours()) + ':';
-//                m = (key.getMinutes() < 10 ? '0'+key.getMinutes() : key.getMinutes()) + ':';
-//                s = (key.getSeconds() < 10 ? '0'+key.getSeconds() : key.getSeconds()) + '.';
-//                ms = key.getMilliseconds();
-//                return Y+M+D+h+m+s+ms;
                 return key.getTime()
             }
         }
@@ -334,16 +296,10 @@ $(function() {
 
 
 
-    $('#show_code').on('click', function() {
+    $('#show_upload').on('click', function() {
         $('#myModal-code').modal();
-        $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e);
-        });
-    });
-
-
-    $('body').on('click', 'table button.btn', function() {
-        $(this).parents('tr').next().toggle();
+        // 手机端长宽为0导致无法添加文件，临时解决办法
+        $('#container').find('.moxie-shim').css('width', '110px').css('height', '32px');
     });
 
 
@@ -479,6 +435,9 @@ function initImg(url, key, height) {
     newImg.src = url;
 }
 $('#contain').on('click', '.fopLink', function() {
+    $(this).parents('.grid').find('p').text('you are my destiny， 永远， you are my destiny， 不变， you are my everything， 只要多看你一眼， 爱你的宿命，给我再多一点点感应。');
+    $("#contain").BlocksIt();
+    return false;
     var height_space = 340;
     var key = $(this).data('key');
     var height = parseInt($(this).parents('.Wrapper').find('.origin-height').text(), 10);
@@ -518,4 +477,62 @@ $('#contain').on('click', '.fopLink', function() {
     initImg(url, key, height);
 
     return false;
+});
+
+// 删除上传图片
+$('#upload-file-list').on('click', '.remove-attachment', function(){
+    var pic = $(this);
+    // 获取当前图片key
+    var key = pic.data('id');
+    // 请求删除数据
+    // 请求数据
+    $.ajax({
+        url:"/delQiniu",
+        type: "POST",
+        data: { key: key}
+    })
+    .done(function(data){
+        if(data === 'error') {
+            alert('删除失败');
+            return false;
+        }
+        // 移除对应块
+        pic.parents('.file-list').remove(); // 不能使用$(this)，获取到对象已经变化
+    });
+});
+
+// 确定上传图片
+$('#photo_submit').click(function(){
+    // 获取所有图像的key
+    var keys = new Array();
+
+    $('.file-list').each(function(){
+        var key = $(this).find('a').data('id');
+        keys.push(key);
+    });
+    if(keys.length == 0){
+        alert('请选择文件!');
+        return false;
+    }
+    // 获取标题，描述，作者
+    var subject = $('#post-title')[0].value;
+    var content = $('#post_description')[0].value;
+    // 提交数据到后台
+    $.ajax({
+        url:"/upQiniu",
+        type: "POST",
+        data: {
+            key: JSON.stringify(keys),
+            subject: subject,
+            content: content
+        }
+    })
+    .done(function(data){
+        if(data === 'error') {
+            alert('提交失败');
+            return false;
+        }
+        // 添加图片到页面
+        location.reload(true);
+    });
 });

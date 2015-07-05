@@ -8,9 +8,22 @@ from myapp import app, kv
 import config
 import json
 from functools import wraps
-from upload import get_token
+from upload import get_token, del_pic
 from kvdb_module import decode_dict
 import qiniu
+
+
+# 允许跨域请求
+def allow_cross_domain(fun):
+    @wraps(fun)
+    def wrapper_fun(*args, **kwargs):
+        rst = make_response(fun(*args, **kwargs))
+        rst.headers['Access-Control-Allow-Origin'] = '*'
+        rst.headers['Access-Control-Allow-Methods'] = 'POST'
+        allow_headers = 'Content-Type'
+        rst.headers['Access-Control-Allow-Headers'] = allow_headers
+        return rst
+    return wrapper_fun
 
 
 @app.before_request
@@ -109,26 +122,43 @@ def uptoken():
 
 
 # 上传文件到七牛
-@app.route('/upQiniu', methods=['POST', 'GET'])
+@app.route('/upQiniu', methods=['POST'])
 def upQiniu():
-    if request.form.get('key'):
-        url = request.form.get('url')
-        upkey = request.form.get('key')
+    if request.form.get('subject'):
+        upkeys = json.loads(request.form.get('key'))
+        subject = request.form.get('subject')
+        if subject is None:
+            subject = 'Sunset Lake'
+        content = request.form.get('content')
+        import re
+        items = re.findall(r'#(.+?)#', content)
+        if len(items):
+            author = items[0]
+        else:
+            author = 'skyway'
         # 时间差，用于加载排序
         import time
         future_time = int(time.mktime(datetime.strptime('3000-01-01 00:00:00.000', "%Y-%m-%d %H:%M:%S.%f").timetuple()) * 1000)
-        uid = future_time - int(upkey)
-        # 存入DB
-        key = 'picbed_%s' % uid
-        object = 'Sunset Lake'
-        words = 'A peaceful sunset view...'
-        author = 'skyway'
-        # print key
-        data = {'upkey': upkey, 'object': object, 'words': words, 'author': author, 'url': url}
-        kv.set(str(key), data)
-        # kv.set_value(str(key), url)
+        for upkey in upkeys:
+            print upkey
+            uid = future_time - int(upkey)
+            # 存入DB
+            key = 'picbed_%s' % uid
+            # print key
+            url = config.PIC_DOMAIN + str(upkey)
+            data = {'upkey': upkey, 'object': subject, 'words': content, 'author': author, 'url': url}
+            kv.set(str(key), data)
         return 'success'
     # token, key = get_token()
     # filePath = "E:/Program/python/new/1/static/bulb_idea.jpg"
     # retData, respInfo = put_file(token, key, filePath)
     # return render_template('upload.html', domain=config.PIC_DOMAIN)
+
+
+# 删除七牛文件
+@app.route('/delQiniu', methods=['POST'])
+def delQiniu():
+    if request.form.get('key'):
+        upkey = request.form.get('key')
+        ret, info = del_pic(upkey)
+        return 'success'

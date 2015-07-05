@@ -43,4 +43,4 @@ PicBed
 ## 说明
 1. flask相关可直接看[flask快速上手](http://dormousehole.readthedocs.org/en/latest/quickstart.html#)
 2. 七牛上传仔细查阅[七牛Python官方文档](http://developer.qiniu.com/docs/v6/sdk/python-sdk.html)
-3. 瀑布流插件[Blockits](http://www.inwebson.com/jquery/blocksit-js-dynamic-grid-layout-jquery-plugin/)详情(这个插件存在重叠问题，考虑换waterfall)
+3. 瀑布流插件[Blockits](http://www.inwebson.com/jquery/blocksit-js-dynamic-grid-layout-jquery-plugin/)详情

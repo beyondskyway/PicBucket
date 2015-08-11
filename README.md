@@ -18,6 +18,8 @@ PicBed
 
 ![移动端样式](http://7ximdq.com1.z0.glb.clouddn.com/1433778348902?imageView2/3/h/300/format/png)
 
+![图片上传](http://7ximdq.com1.z0.glb.clouddn.com/1439276302175)
+
 ---
 
 ## 功能简介

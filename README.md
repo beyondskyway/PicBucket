@@ -1,9 +1,9 @@
-PicBed
+PicBucket
 ============
 
 基于七牛和SAE开发的图床
 
-示例网站：[PicBed](http://weiboxb.sinaapp.com/)
+示例网站：[PicBucket](http://weiboxb.sinaapp.com/)
 
 ---
 
@@ -14,16 +14,12 @@ PicBed
 * 简化七牛JS-SDK（上传，预览，加载）到一个页面，采用瀑布流式布局（Blockits）
 * 响应式布局，可兼容PC端和移动端（chrome）
 
-![PC端样式](http://7ximdq.com1.z0.glb.clouddn.com/1433777946719?imageView2/3/h/500/format/png)
-
-![移动端样式](http://7ximdq.com1.z0.glb.clouddn.com/1433778348902?imageView2/3/h/300/format/png)
-
-![图片上传](http://7ximdq.com1.z0.glb.clouddn.com/1439276302175?imageView2/3/h/500/format/png)
+![样式](http://7ximdq.com1.z0.glb.clouddn.com/1445326252487)
 
 ---
 
 ## 功能简介
-* 七牛JS-SDK基本功能：上传，预览，水印，旋转，缩放等
+* 七牛JS-SDK基本功能：上传，预览，水印，旋转，缩放等（部分已被隐藏）
 * 按上传时间倒序，瀑布流布局，自动加载更多
 * 长图底部波浪线，隐藏超出部分
 * 封装sae的KVDB方便调用

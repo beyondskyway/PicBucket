@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
+    <link rel='stylesheet' href='/static/css/materialize.css'/>
 </head>
 <body>
 
@@ -23,7 +24,27 @@
 	</div>
 	<div class="clearfix"></div>
 </header>
-<nav class="navbar navbar-default navbar-fixed-top">
+<!-- Dropdown Structure -->
+<ul id="dropdown_menu" class="dropdown-content">
+  <li><a href="#!">上传图片</a></li>
+  <li><a href="#!">我的主页</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">退出</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">美图</a></li>
+      <li><a href="badges.html">图书</a></li>
+      <li><a href="badges.html">影视</a></li>
+      <li><a href="badges.html">音乐</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown_menu">设置<i class="material-icons right"></i></a></li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -187,5 +208,5 @@
 <script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>
 <script type="text/javascript" src="/static/js/blocksit.js"></script>
-
+<script type="text/javascript" src="/static/js/materialize.js"></script>
 </html>

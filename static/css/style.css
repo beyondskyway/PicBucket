@@ -1,0 +1,26 @@
+/*
+    by skywatcher@2015-12-31
+    version:1.0
+*/
+a:active, a:hover {
+    outline: none;
+    text-decoration: none;
+}
+
+.nav-wrapper a.brand-logo{
+    padding: 0 15px 0 15px;
+    /*background: url("/static/img/logo.jpg") center left no-repeat;*/
+}
+
+.logo_img{
+    width: 48px;
+    height: 48px;
+}
+
+nav ul a{
+    font-size: 18px;
+}
+
+.nav_active{
+    background-color: rgba(0, 0, 0, 0.1);
+}

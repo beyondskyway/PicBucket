@@ -24,3 +24,14 @@ nav ul a{
 .nav_active{
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+nav.dropdown-content{
+    min-width: 120px;
+    right: 0;
+}
+
+ul#dropdown_menu.dropdown-content.active{
+    min-width: 120px;
+    right: 0;
+    margin-top: 64px;
+}

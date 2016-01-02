@@ -2,6 +2,11 @@
     by skywatcher@2015-12-31
     version:1.0
 */
+.container{
+    position: absolute;
+    top: 15%;
+}
+
 a:active, a:hover {
     outline: none;
     text-decoration: none;
@@ -9,12 +14,34 @@ a:active, a:hover {
 
 .nav-wrapper a.brand-logo{
     padding: 0 15px 0 15px;
+    height: 100%;
     /*background: url("/static/img/logo.jpg") center left no-repeat;*/
 }
 
 .logo_img{
     width: 48px;
     height: 48px;
+    margin: 8px 10px 0 10px;
+    border-radius:50% ;
+}
+
+@media (max-width:601px) {
+    .logo_img{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width:601px) {
+    .logo_img{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.brand-logo>p{
+    float: right;
+    margin: auto;
 }
 
 nav ul a{
@@ -34,4 +61,52 @@ ul#dropdown_menu.dropdown-content.active{
     min-width: 120px;
     right: 0;
     margin-top: 64px;
+}
+
+.overflow-visible {
+    overflow-y: visible;
+    overflow-x: visible;
+}
+
+/*upload modal*/
+.mobile-display, .mobile-display-block {
+    display: none;
+    visibility: hidden;
+}
+
+@media (max-width: 768px){
+    .mobile-display-block {
+        display: block;
+        visibility: visible;
+    }
+}
+
+.modal-close-button-mobile, .profileStats .number {
+    text-align: right;
+}
+
+.modal-close-button-mobile>i {
+    font-size: 2.6rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #f15e0c;
+}
+
+@media (max-width: 768px){
+    .mobile-hidden {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.modal-close-button {
+    position: absolute;
+    top: -26px;
+    right: -26px;
+    z-index: 1000;
+}
+
+.modal-close-button>i {
+    color: #f15e0c;
 }

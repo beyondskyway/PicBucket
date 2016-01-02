@@ -107,6 +107,67 @@ def pic_bed():
     return render_template('PicBed.html', data=json_data, domain=config.PIC_DOMAIN)
 
 
+# 显示图片
+@app.route('/bucket', methods=['POST', 'GET'])
+def bucket():
+    # 加载更多
+    if request.form.get('key'):
+        key = request.form.get('key')
+        # print key
+        key_values = kv.get_by_prefix('picbed_', 10, key)
+        # print sorted(kv.getkeys_by_prefix('picbed', 3, key))
+        data = tuple(key_values)
+        # data = sorted(data, reverse=True)
+        print data
+        json_data = []
+        for item in data:
+            tmp = {}
+            tmp['key'] = item[0]
+            if '\x1e' in item[1]:
+                content = decode_dict(item[1])
+                # print content
+                tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+                tmp['object'] = content['object']
+                tmp['words'] = content['words']
+                tmp['upkey'] = content['upkey']
+                tmp['author'] = content['author']
+            else:
+                tmp['url'] = item[1] + "?imageView2/2/w/400/format/jpg"
+                tmp['object'] = 'Sunset Lake'
+                tmp['words'] = 'A peaceful sunset view...'
+                tmp['upkey'] = item[1][-13:]
+                tmp['author'] = 'skyway'
+            json_data.append(tmp)
+        json_str = json.dumps(json_data)
+        return json_str
+    # 初始加载
+    key_values = kv.get_by_prefix('picbed_', 20, None)
+    # print sorted(kv.getkeys_by_prefix('picbed', 3, None))
+    data = tuple(key_values)
+    json_data = []
+    for item in data:
+        tmp = {}
+        tmp['key'] = item[0]
+        if '\x1e' in item[1]:
+            content = decode_dict(item[1])
+            # print content
+            tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+            tmp['object'] = content['object']
+            tmp['words'] = content['words']
+            tmp['upkey'] = content['upkey']
+            tmp['author'] = content['author']
+        else:
+            tmp['url'] = item[1] + "?imageView2/2/w/400/format/jpg"
+            tmp['object'] = 'Sunset Lake'
+            tmp['words'] = 'A peaceful sunset view...'
+            tmp['upkey'] = item[1][-13:]
+            tmp['author'] = 'skyway'
+        json_data.append(tmp)
+    # data = sorted(data, reverse=True)
+    # print data
+    return render_template('index.html', data=json_data, domain=config.PIC_DOMAIN)
+
+
 # 获取uptoken
 @app.route('/uptoken', methods=['POST', 'GET'])
 def uptoken():

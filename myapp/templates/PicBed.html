@@ -12,34 +12,43 @@
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
-    <link rel='stylesheet' href='/static/css/materialize.css'/>
-    <link rel='stylesheet' href='/static/css/style.css?ver=1.0'/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
 <input type="hidden" id="domain" value="{{ domain }}">
 <input type="hidden" id="uptoken_url" value="/uptoken">
 
-<!-- Dropdown Structure -->
-<ul id="dropdown_menu" class="dropdown-content">
-  <li><a id="show_upload">上传图片</a></li>
-  <li><a href="#">我的Bucket</a></li>
-  <li class="divider"></li>
-  <li><a href="#">退  出</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">
-        <img class="logo_img" src="/static/img/logo.jpg">
-        PicBucket</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a class="nav_active" href="">图 床</a></li>
-      <li><a href="">美 图</a></li>
-      <li><a href="">接 口</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">设 置<i class="material-icons right"></i></a></li>
-    </ul>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img class="img_logo" src="/static/img/logo.jpg">
+        </a>
+        <a class="navbar-brand" href="#">Sky</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">最新<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">美图</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="img_logo" src="/static/img/logo.jpg"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a id="show_upload" href="#">上传图片</a></li>
+            <li><a href="#">我的Sky</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">退出</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <!-- Content -->
@@ -160,19 +169,6 @@
     </div>
 </div>
 </section>
-
-<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><a id="" class="btn-floating red"><i class="material-icons">file_upload</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">search</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">help</i></a></li>
-    </ul>
-</div>
-
 <div id="loading" class="loading">
     <img id="load_img" src="/static/img/loading2.gif">
     <span id="load_text">正在加载...</span>

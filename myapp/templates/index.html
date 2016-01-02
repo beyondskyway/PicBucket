@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PicBed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="demonstration,demo,jquery,blocksit.js,css3,dynamic,grid,layout,inwebson"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
+    <link rel='stylesheet' href='/static/css/materialize.css'/>
+    <link rel='stylesheet' href='/static/css/style.css?ver=1.0'/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<input type="hidden" id="domain" value="{{ domain }}">
+<input type="hidden" id="uptoken_url" value="/uptoken">
+
+<!-- Dropdown Structure -->
+<ul id="dropdown_menu" class="dropdown-content">
+  <li><a id="show_upload">Upload</a></li>
+  <li><a href="#">My Bucket</a></li>
+  <li class="divider"></li>
+  <li><a href="#">Logout</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">
+        <img class="logo_img" src="/static/img/logo.jpg">
+        <p>PicBucket</p>
+    </a>
+    <ul class="right hide-on-med-and-down">
+      <li><a class="nav_active" href="">PicBed</a></li>
+      <li><a href="">Gallery</a></li>
+      <li><a href="">Interface</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+<!-- Content -->
+<section id="wrapper">
+    <div id="contain">
+        {% for item in data %}
+            <div class="grid" data-key="{{ item['key'] }}">
+                <div class="imgholder">
+                    <a class="fopLink" data-key="{{ item['upkey'] }}">
+                        <img class="img_load" src="{{ item['url'] }}" />
+                    </a>
+                </div>
+                <span class="stop"></span>
+                <strong>{{ item['object'] }}</strong>
+                <div class="description">
+                    <p>{{ item['words'] }}</p>
+                    <div class="meta">by {{ item['author'] }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <div id="upload_modal" class="overflow-visible modal card center-align">
+            <div id="upload_mobile_close" class="modal-close-button-mobile modal-close mobile-display-block">
+                <i class="material-icons">clear</i>
+            </div>
+            <button id="upload_close" class="btn-floating btn-large waves-effect waves-orange-100 white modal-close modal-close-button mobile-hidden">
+                <i class="material-icons">clear</i>
+            </button>
+            <div class="modal-content">
+
+            </div>
+        </div>
+        <div class="modal fade body upload-img" id="myModal-code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="body">
+                      <div class="col-md-12 ">
+                          <ul>
+                              <li>
+                                  <input type="text" name="post_title" id="post-title" class="regular-text large" placeholder="在此输入标题" required="">
+                              </li>
+                              <li>
+                                  <textarea name="post_description" id="post_description" class="regular-text large" placeholder="在此输入图片描述 #作者#" required=""></textarea>
+                              </li>
+                              <li>
+                                  <div id="container" style="position: relative;">
+                                      <a class="upload-button" id="pickfiles" href="#">
+                                          <i class="glyphicon glyphicon-picture"></i>
+                                          <sapn>选择文件</sapn>
+                                      </a>
+                                      <div id="upload-file-list">
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="submit-block">
+                                  <input id="photo_submit" class="post-submit regular-button" type="submit" name="submit" value="确认上传">
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade body view-img" id="myModal-img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">预览</h4>
+              </div>
+              <div class="modal-body">
+                <div class="modal-body-wrapper text-center">
+                    <img src="" alt="" data-key="" data-h="">
+                </div>
+                <div class="modal-body-footer">
+                    <div class="watermark">
+                        <span>水印：</span>
+                        <a href="#" data-watermark="NorthWest" class="btn btn-default">
+                            左上
+                        </a>
+                        <a href="#" data-watermark="SouthWest" class="btn btn-default">
+                            左下
+                        </a>
+                        <a href="#" data-watermark="NorthEast" class="btn btn-default">
+                            右上
+                        </a>
+                        <a href="#" data-watermark="SouthEast" class="btn btn-default">
+                            右下
+                        </a>
+                        <a href="#" data-watermark="false" class="btn btn-default">
+                            无
+                        </a>
+                    </div>
+                     <div class="imageView2">
+                        <span>缩略：</span>
+                        <a href="#" data-imageview="large" class="btn btn-default disabled">
+                            大
+                        </a>
+                        <a href="#" data-imageview="middle" class="btn btn-default">
+                            中
+                        </a>
+                        <a href="#" data-imageview="small" class="btn btn-default">
+                            小
+                        </a>
+                    </div>
+                    <div class="imageMogr2">
+                        <span>旋转：</span>
+                        <a href="#" data-imagemogr="left" class="btn btn-default no-disable-click" >
+                            逆时针
+                        </a>
+                        <a href="#" data-imagemogr="right" class="btn btn-default no-disable-click">
+                            顺时针
+                        </a>
+                        <a href="#" data-imagemogr="no-rotate" class="btn btn-default">
+                            无
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a id="file_upload" class="btn-floating red"><i class="material-icons">file_upload</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">search</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">help</i></a></li>
+    </ul>
+</div>
+
+<div id="loading" class="loading">
+    <img id="load_img" src="/static/img/loading2.gif">
+    <span id="load_text">正在加载...</span>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/js/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="/static/js/ui.js"></script>
+<script type="text/javascript" src="/static/js/qiniu.js"></script>
+<script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script type="text/javascript" src="/static/js/blocksit.js"></script>
+<script type="text/javascript" src="/static/js/materialize.js"></script>
+</html>

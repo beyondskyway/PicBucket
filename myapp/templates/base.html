@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
+    {% block head %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="demonstration,demo,jquery,blocksit.js,css3,dynamic,grid,layout,inwebson"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='/static/css/materialize.css'/>
+    <link rel='stylesheet' href='/static/css/style.css?ver=1.0'/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock %}
+    <title>
+        {% block title %}PicBucket{% endblock %}
+    </title>
 </head>
 <body>
-
+    {% block content %}{% endblock %}
+    {% block script %}
+        <script type="text/javascript" src="/static/js/materialize.js"></script>
+    {% endblock %}
 </body>
 </html>

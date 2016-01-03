@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PicBed</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <meta name="keywords" content="demonstration,demo,jquery,blocksit.js,css3,dynamic,grid,layout,inwebson"/>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
     <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
-    <link rel='stylesheet' href='/static/css/materialize.css'/>
-    <link rel='stylesheet' href='/static/css/style.css?ver=1.0'/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
 
+{% endblock %}
+
+{% block title %}PicBed{% endblock %}
+
+{% block content %}
+
+{# 七牛信息 #}
 <input type="hidden" id="domain" value="{{ domain }}">
 <input type="hidden" id="uptoken_url" value="/uptoken">
 
-<!-- Dropdown Structure -->
+{# 下拉菜单 #}
 <ul id="dropdown_menu" class="dropdown-content">
   <li><a id="show_upload">Upload</a></li>
   <li><a href="#">My Bucket</a></li>
@@ -35,12 +30,11 @@
       <li><a class="nav_active" href="">PicBed</a></li>
       <li><a href="">Gallery</a></li>
       <li><a href="">Interface</a></li>
-      <!-- Dropdown Trigger -->
       <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
   </div>
 </nav>
-<!-- Content -->
+{# 内容加载 #}
 <section id="wrapper">
     <div id="contain">
         {% for item in data %}
@@ -59,7 +53,9 @@
             </div>
         {% endfor %}
     </div>
+    {# 弹出框 #}
     <div class="container">
+        {# 上传弹出框 #}
         <div id="upload_modal" class="overflow-visible modal card center-align">
             <div id="upload_mobile_close" class="modal-close-button-mobile modal-close mobile-display-block">
                 <i class="material-icons">clear</i>
@@ -68,9 +64,10 @@
                 <i class="material-icons">clear</i>
             </button>
             <div class="modal-content">
-
+                
             </div>
         </div>
+        {# 预览弹出框 #}
         <div class="modal fade body upload-img" id="myModal-code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -168,8 +165,14 @@
           </div>
         </div>
     </div>
+    {# 加载更多 #}
+    <div id="loading" class="loading">
+        <img id="load_img" src="/static/img/loading2.gif">
+        <span id="load_text">正在加载...</span>
+    </div>
 </section>
-
+{# 浮动按钮 #}
+<section>
 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">mode_edit</i>
@@ -181,19 +184,17 @@
       <li><a class="btn-floating blue"><i class="material-icons">help</i></a></li>
     </ul>
 </div>
+</section>
+{% endblock %}
 
-<div id="loading" class="loading">
-    <img id="load_img" src="/static/img/loading2.gif">
-    <span id="load_text">正在加载...</span>
-</div>
+{% block script %}
+    {{ super() }}
+    <script type="text/javascript" src="/static/js/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
+    <script type="text/javascript" src="/static/js/ui.js"></script>
+    <script type="text/javascript" src="/static/js/qiniu.js"></script>
+    <script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
+    <script type="text/javascript" src="/static/js/blocksit.js"></script>
+{% endblock %}
 
-</body>
-<script type="text/javascript" src="/static/js/plupload/plupload.full.min.js"></script>
-<script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="/static/js/ui.js"></script>
-<script type="text/javascript" src="/static/js/qiniu.js"></script>
-<script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
-<script type="text/javascript" src="/static/js/main.js"></script>
-<script type="text/javascript" src="/static/js/blocksit.js"></script>
-<script type="text/javascript" src="/static/js/materialize.js"></script>
-</html>

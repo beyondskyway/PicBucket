@@ -2,6 +2,11 @@
     by skywatcher@2015-12-31
     version:1.0
 */
+ul, li {
+  list-style: none;
+  padding: 0;
+}
+
 .container{
     position: absolute;
     top: 15%;
@@ -46,10 +51,6 @@ a:active, a:hover {
 
 nav ul a{
     font-size: 18px;
-}
-
-.nav_active{
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 nav.dropdown-content{

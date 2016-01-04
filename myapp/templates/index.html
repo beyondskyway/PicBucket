@@ -27,7 +27,7 @@
         <p>PicBucket</p>
     </a>
     <ul class="right hide-on-med-and-down">
-      <li><a class="nav_active" href="">PicBed</a></li>
+      <li class="active"><a class="nav_active" href="">PicBed</a></li>
       <li><a href="">Gallery</a></li>
       <li><a href="">Interface</a></li>
       <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -35,7 +35,7 @@
   </div>
 </nav>
 {# 内容加载 #}
-<section id="wrapper">
+<section>
     <div id="contain">
         {% for item in data %}
             <div class="grid" data-key="{{ item['key'] }}">
@@ -64,7 +64,49 @@
                 <i class="material-icons">clear</i>
             </button>
             <div class="modal-content">
-                
+                <div class="modal-title"><h5>文件上传</h5></div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="input_text" type="text" length="10">
+                                <label for="input_text">图片标题</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+                                <label for="textarea1">图片详细描述（#作者#）</label>
+                            </div>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>选择文件</span>
+                                <input type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="选择多个文件">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <ul>
+                    <li class="pic-title">
+                        <input type="text" name="pic_title" id="pic_title" class="" placeholder="图片标题">
+                    </li>
+                    <li class="pic-desciption">
+                        <textarea type="text" name="pic_desc" id="pic_desc" class="" placeholder="图片详细描述（#作者#）"></textarea>
+                    </li>
+                    <li class="pic-upload">
+                        <a class="waves-effect waves-light btn"><i class="material-icons">folder_open</i>选择文件</a>
+                    </li>
+                    <li>
+                        <div id="pic-list"></div>
+                    </li>
+                    <li class="upload-submit">
+                        <input id="pic_submit" class="" type="submit" name="submit" value="确认上传">
+                    </li>
+                </ul>
             </div>
         </div>
         {# 预览弹出框 #}

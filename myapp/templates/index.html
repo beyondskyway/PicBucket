@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}
     {{ super() }}
-    <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />
+{#    <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />#}
 
 {% endblock %}
 
@@ -69,14 +69,12 @@
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="input_text" type="text" length="10">
-                                <label for="input_text">图片标题</label>
+                                <input id="input_text" type="text" length="10" placeholder="图片标题">
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
-                                <label for="textarea1">图片详细描述（#作者#）</label>
+                                <textarea id="textarea1" class="materialize-textarea" length="120" placeholder="图片详细描述（#作者#）"></textarea>
                             </div>
                         </div>
                         <div class="file-field input-field">
@@ -88,20 +86,21 @@
                             <input class="file-path validate" type="text" placeholder="选择多个文件">
                             </div>
                         </div>
+                        <div class="row">
+                            <div id="pic-list"></div>
+                        </div>
+                        <div class="row submit">
+                            <a class="waves-effect waves-light btn">
+                                <i class="material-icons left">file_upload</i>确定上传</a>
+                        </div>
                     </form>
                 </div>
                 <ul>
-                    <li class="pic-title">
-                        <input type="text" name="pic_title" id="pic_title" class="" placeholder="图片标题">
-                    </li>
-                    <li class="pic-desciption">
-                        <textarea type="text" name="pic_desc" id="pic_desc" class="" placeholder="图片详细描述（#作者#）"></textarea>
-                    </li>
                     <li class="pic-upload">
-                        <a class="waves-effect waves-light btn"><i class="material-icons">folder_open</i>选择文件</a>
+
                     </li>
                     <li>
-                        <div id="pic-list"></div>
+
                     </li>
                     <li class="upload-submit">
                         <input id="pic_submit" class="" type="submit" name="submit" value="确认上传">

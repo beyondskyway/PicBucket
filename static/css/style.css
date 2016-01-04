@@ -111,3 +111,29 @@ ul#dropdown_menu.dropdown-content.active{
 .modal-close-button>i {
     color: #f15e0c;
 }
+
+.modal-title{
+    float: left;
+}
+
+.modal-content.input-field{
+    margin-top: 0;
+}
+
+.modal-content input{
+    margin-bottom: 5px;
+}
+
+.modal-content textarea{
+    min-height: 2rem;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.modal-content .row{
+    margin-bottom: 0;
+}
+
+.modal-content .row .submit {
+    float: right;
+}

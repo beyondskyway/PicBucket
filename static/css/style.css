@@ -137,3 +137,52 @@ ul#dropdown_menu.dropdown-content.active{
 .modal-content .row .submit {
     float: right;
 }
+/*上传图片列表*/
+.upload-list {
+    border: 2px dotted #E5E5E5;
+    margin: 20px 12px;
+    min-height: 100px;
+}
+
+.upload-list .file-list {
+    height: auto;
+    line-height: 36px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 10px;
+}
+
+.upload-list .thumb {
+  float: left;
+  width: 80px;
+  height: 80px;
+}
+
+.upload-list .attachment-meta {
+  height: 28px;
+  overflow: hidden;
+  line-height: 31px;
+  margin-left: 160px;
+  margin-top: 26px;
+}
+
+@media screen and (max-width:768px) {
+    .upload-list .attachment-meta {
+      margin-left: 0;
+    }
+}
+
+.upload-list .remove-attachment {
+  display: block;
+  float: right;
+  background-color: #ea4c89;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0 15px;
+  height: 28px;
+  /* margin: 0; */
+  line-height: 28px;
+  width: 100px;
+  text-align: center;
+}

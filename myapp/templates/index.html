@@ -35,8 +35,8 @@
   </div>
 </nav>
 {# 内容加载 #}
-<section>
-    <div id="contain">
+<section class="content">
+    <div id="contain" class="contain">
         {% for item in data %}
             <div class="grid" data-key="{{ item['key'] }}">
                 <div class="imgholder">
@@ -218,7 +218,6 @@
     <script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
     <script type="text/javascript" src="/static/js/ui.js"></script>
     <script type="text/javascript" src="/static/js/qiniu.js"></script>
-    <script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
     <script type="text/javascript" src="/static/js/main.js"></script>
     <script type="text/javascript" src="/static/js/blocksit.js"></script>
 {% endblock %}

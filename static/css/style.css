@@ -14,7 +14,7 @@ nav {
 
 .container{
     position: absolute;
-    top: 5%;
+     top: 4rem;
 }
 
 .container .modal{
@@ -26,10 +26,10 @@ nav {
 
 .container .modal-content{
     width: 80%;
-    margin: 10% auto;
+    margin: 3rem auto;
+    margin-bottom: 6rem;
     background-color: #fafafa;
     border-radius: 2px;
-    will-change: top, opacity;
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
 }
 
@@ -127,8 +127,8 @@ ul#dropdown_menu.dropdown-content.active{
 
 .modal-close-button {
     position: absolute;
-    top: -26px;
-    right: -26px;
+    top: -52px;
+    right: -52px;
     z-index: 1000;
 }
 
@@ -212,4 +212,92 @@ ul#dropdown_menu.dropdown-content.active{
   line-height: 28px;
   width: 100px;
   text-align: center;
+}
+
+.content{
+    padding-top: 64px;
+}
+
+.contain{
+	margin:0 auto;
+	padding-bottom: 10px;
+    position:relative;
+}
+
+@media screen and (max-width: 450px) {
+    .contain {
+        width: 95% !important;
+    }
+}
+
+.grid{
+	min-height:100px;
+	padding: 0;
+	background:#fff;
+	margin:8px;
+	font-size:12px;
+	float:left;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+
+	-webkit-transition: top 1s ease, left 1s ease;
+	-moz-transition: top 1s ease, left 1s ease;
+	-o-transition: top 1s ease, left 1s ease;
+}
+
+.grid strong {
+	border-bottom:1px solid #ccc;
+	margin:10px 0 0;
+	display:block;
+	padding:0 16px 5px;
+	font-size:17px;
+}
+
+@media screen and (min-width: 768px) {
+    .grid{
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .grid strong{
+        padding: 0 5px 5px;
+        font-size: 13px;
+    }
+}
+.grid .description{
+	border-top: 1px solid #F2F2F2;
+    background: #FAFAFA;
+    position: relative;
+    padding: 0 15px 10px 15px;
+}
+
+.grid .meta{
+	color:#777;
+	font-style:italic;
+	text-align:right;
+}
+
+.grid .imgholder{
+	max-height:800px;
+	overflow:hidden;
+}
+
+.grid .imgholder img{
+	max-width:100%;
+	background:#ccc;
+	display:block;
+	margin:0 auto;
+}
+
+.grid .stop {
+	margin-top: -10px;
+	display: none;
+	z-index: 1;
+	width: 100%;
+	height: 12px;
+	left: 0;
+	background: url(/static/img/long_image_shadow.png) repeat-x 4px top;
+	position: absolute;
 }

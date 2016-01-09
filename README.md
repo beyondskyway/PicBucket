@@ -4,6 +4,7 @@ PicBucket
 基于七牛和SAE开发的图床
 
 示例网站：[PicBucket](http://weiboxb.sinaapp.com/)
+New: [PicBucket](http://weiboxb.sinaapp.com/bucket)
 
 ---
 

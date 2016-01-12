@@ -1,11 +1,9 @@
 /**
  * Created by Sky on 2016/1/11.
+ * Version：0.1.0
  */
 
-/*global Qiniu */
-/*global plupload */
-/*global FileProgress */
-
+// 根据宽度调整显示列数和图片宽度
 var col;
 var isScroll = 0;
 
@@ -117,7 +115,7 @@ var img_load = function(url, key) {
     }
 };
 
-
+// 滚动加载数据
 $(window).scroll(function () {
     var clientHeight = $(window).height(),
         scrollTop = $(window).scrollTop(),
@@ -180,6 +178,8 @@ $(window).scroll(function () {
     }
 });
 
+
+// 图片上传七牛
 $(function() {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
@@ -291,6 +291,13 @@ $(function() {
         e.preventDefault();
         $('#container').addClass('draging');
         e.stopPropagation();
+    });
+
+    // 弹出上传对话框
+    $('show_upload').on('click', function() {
+        // 隐藏body滚动条
+        $("#main").css('overflow', 'hidden');
+        $('#upload_modal').show();
     });
 
     // 弹出上传文件对话框

@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
     {{ super() }}
-{#    <link rel='stylesheet' href='/static/css/pic_bed.css' media='screen' />#}
-
 {% endblock %}
 
 {% block title %}PicBed{% endblock %}
@@ -15,10 +13,10 @@
 
 {# 下拉菜单 #}
 <ul id="dropdown_menu" class="dropdown-content">
-  <li><a id="show_upload">Upload</a></li>
-  <li><a href="#">My Bucket</a></li>
+  <li><a id="show_upload">上传</a></li>
+  <li><a href="#">我的Bucket</a></li>
   <li class="divider"></li>
-  <li><a href="#">Logout</a></li>
+  <li><a href="#">退出</a></li>
 </ul>
 <nav>
   <div class="nav-wrapper">
@@ -27,9 +25,9 @@
         <p>PicBucket</p>
     </a>
     <ul class="right hide-on-med-and-down">
-      <li class="active"><a class="nav_active" href="">PicBed</a></li>
-      <li><a href="">Gallery</a></li>
-      <li><a href="">Interface</a></li>
+      <li class="active"><a class="nav_active" href="">图 床</a></li>
+      <li><a href="">美 图</a></li>
+      <li><a href="">API</a></li>
       <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
   </div>

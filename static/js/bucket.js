@@ -294,7 +294,7 @@ $(function() {
     });
 
     // 弹出上传对话框
-    $('show_upload').on('click', function() {
+    $('#show_upload').on('click', function() {
         // 隐藏body滚动条
         $("#main").css('overflow', 'hidden');
         $('#upload_modal').show();
@@ -318,6 +318,11 @@ $(function() {
     $('#upload_close').on('click', function() {
         $("#main").css('overflow', 'auto');
         $('#upload_modal').hide();
+    });
+
+    // 弹出关于对话框
+    $('#about_me').on('click', function(){
+
     });
 
     var getRotate = function(url) {

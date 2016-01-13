@@ -37,7 +37,7 @@ New: [PicBucket](http://weiboxb.sinaapp.com/bucket)
 ## 修改历史
 * 2015-06-09：调整移动端和PC端样式(主要改动上传和预览，采用响应式布局)
 * 2105-07-06：重写上传文件UI，添加删除文件，附加标题、描述，修复图片重叠问题，修改PC端和移动端显示，修复移动端部分浏览器无法选择图片问题
-
+* 2015-01-30：尽量使用Material Design重写
 
 ## 说明
 1. flask相关可直接看[flask快速上手](http://dormousehole.readthedocs.org/en/latest/quickstart.html#)

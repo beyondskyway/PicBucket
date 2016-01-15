@@ -322,3 +322,21 @@ ul#dropdown_menu.dropdown-content.active{
     width: 100%;
 }
 
+.about-modal .row{
+    position: relative;
+}
+
+.about-modal .modal-close-button{
+    top: -2rem;
+    right: -1.2rem;
+}
+
+.about-modal .modal-close-button-mobile{
+    top: -10px;
+    right: 0;
+    z-index: 1;
+}
+
+.about-modal .card-content{
+    height: 200px;
+}

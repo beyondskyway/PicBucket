@@ -307,14 +307,13 @@ $(function() {
         $('#upload_modal').show();
     });
 
-    // 隐藏上传文件对话框
+    // 关闭上传文件对话框
     $('#upload_mobile_close').on('click', function() {
         // 显示body滚动条
         $("#main").css('overflow', 'auto');
         $('#upload_modal').hide();
     });
 
-    // 关闭上传文件对话框
     $('#upload_close').on('click', function() {
         $("#main").css('overflow', 'auto');
         $('#upload_modal').hide();
@@ -323,6 +322,16 @@ $(function() {
     // 弹出关于对话框
     $('#about_me').on('click', function(){
         $("#about_modal").show();
+    });
+
+    //关闭关于对话框
+    $('#about_close').on('click', function(){
+        $("#about_modal").hide();
+    });
+
+    $('#about_mobile_close').on('click', function(){
+        $("#about_modal").hide();
+        tos
     });
 
     var getRotate = function(url) {

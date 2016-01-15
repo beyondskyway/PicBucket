@@ -30,6 +30,7 @@ nav {
     margin-bottom: 6rem;
     background-color: #fafafa;
     border-radius: 2px;
+    will-change: top, opacity;
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
 }
 
@@ -232,7 +233,7 @@ ul#dropdown_menu.dropdown-content.active{
 
 .grid{
 	min-height:100px;
-	padding: 0;
+	padding: 0px;
 	background:#fff;
 	margin:8px;
 	font-size:12px;
@@ -244,6 +245,7 @@ ul#dropdown_menu.dropdown-content.active{
 	-webkit-transition: top 1s ease, left 1s ease;
 	-moz-transition: top 1s ease, left 1s ease;
 	-o-transition: top 1s ease, left 1s ease;
+	-ms-transition: top 1s ease, left 1s ease;
 }
 
 .grid strong {
@@ -301,3 +303,22 @@ ul#dropdown_menu.dropdown-content.active{
 	background: url(/static/img/long_image_shadow.png) repeat-x 4px top;
 	position: absolute;
 }
+
+.about-modal{
+    height: 100%;
+}
+
+.about-modal .modal-content{
+    width: 500px;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.about-modal .card{
+    margin: 0;
+}
+
+.about-modal .col.s12.m6{
+    width: 100%;
+}
+

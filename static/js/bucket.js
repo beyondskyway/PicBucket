@@ -322,7 +322,7 @@ $(function() {
 
     // 弹出关于对话框
     $('#about_me').on('click', function(){
-
+        $("#about_modal").show();
     });
 
     var getRotate = function(url) {

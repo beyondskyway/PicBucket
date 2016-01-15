@@ -3,7 +3,7 @@
     {{ super() }}
 {% endblock %}
 
-{% block title %}PicBed{% endblock %}
+{% block title %}PicBucket{% endblock %}
 
 {% block content %}
 
@@ -128,7 +128,69 @@
                 </div>
             </div>
         </div>
+        {# About对话框#}
+        <div id="about_modal" class="modal about-modal">
+            <div class="modal-content">
+                <div class="row">
+                    <button id="about_close" class="btn-floating btn-large waves-effect waves-orange-100 white modal-close modal-close-button mobile-hidden">
+                        <i class="material-icons">clear</i>
+                    </button>
+                    <div class="col s12 m6">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">关于PicBucket</span>
+
+                                <p>我只是想让我的图片能有个安生之处，仅此而已！</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="http://skywatcher.me">SkyWatcher</a>
+                                <a href="https://github.com/beyondskyway/PicBucket">Fork</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         {# 预览弹出框 #}
+        <div class="modal fade body upload-img" id="myModal-code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="body">
+                      <div class="col-md-12 ">
+                          <ul>
+                              <li>
+                                  <input type="text" name="post_title" id="post-title" class="regular-text large" placeholder="在此输入标题" required="">
+                              </li>
+                              <li>
+                                  <textarea name="post_description" id="post_description" class="regular-text large" placeholder="在此输入图片描述 #作者#" required=""></textarea>
+                              </li>
+                              <li>
+                                  <div id="container" style="position: relative;">
+                                      <a class="upload-button" id="pickfiles" href="#">
+                                          <i class="glyphicon glyphicon-picture"></i>
+                                          <sapn>选择文件</sapn>
+                                      </a>
+                                      <div id="upload-file-list">
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="submit-block">
+                                  <input id="photo_submit" class="post-submit regular-button" type="submit" name="submit" value="确认上传">
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="modal fade body view-img" id="myModal-img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -217,7 +279,8 @@
     <script type="text/javascript" src="/static/js/plupload/i18n/zh_CN.js"></script>
     <script type="text/javascript" src="/static/js/ui.js"></script>
     <script type="text/javascript" src="/static/js/qiniu.js"></script>
-    <script type="text/javascript" src="/static/js/bucket.js"></script>
+    <script type="text/javascript" src="/static/js/imagesloaded.pkgd.js"></script>
+    <script type="text/javascript" src="/static/js/bucket.js?ver=0.1.0"></script>
     <script type="text/javascript" src="/static/js/blocksit.js"></script>
 {% endblock %}
 

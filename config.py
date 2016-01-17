@@ -16,3 +16,14 @@ QINIU_SECRET_KEY = 'secret-key'
 PIC_BUCKET = 'bucket-name'
 # 七牛域名
 PIC_DOMAIN = 'domain-url'
+
+
+# MYSQL配置信息
+MYSQL_USER = ''
+MYSQL_PASS = ''
+MYSQL_HOST = '127.0.0.1'
+MYSQL_HOST_S = '127.0.0.1'
+MYSQL_PORT = '3306'
+MYSQL_DB = 'bucket'
+
+SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_PORT, MYSQL_DB)

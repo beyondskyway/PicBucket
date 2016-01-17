@@ -263,8 +263,9 @@ $(function() {
             ,
             'Key': function(up, file) {
                 //当前时间戳
+                var name = file.name.split('.').reverse();
                 var key = new Date();
-                return key.getTime()
+                return key.getTime().toString() + '.' + name[0]
             }
         }
     });

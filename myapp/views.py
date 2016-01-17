@@ -201,8 +201,8 @@ def upQiniu():
         import time
         future_time = int(time.mktime(datetime.strptime('3000-01-01 00:00:00.000', "%Y-%m-%d %H:%M:%S.%f").timetuple()) * 1000)
         for upkey in upkeys:
-            print upkey
-            uid = future_time - int(upkey)
+            # 去掉扩展名
+            uid = future_time - int(upkey.split('.')[0])
             # 存入DB
             key = 'picbed_%s' % uid
             # print key

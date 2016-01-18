@@ -200,13 +200,19 @@ def upQiniu():
         # 时间差，用于加载排序
         import time
         future_time = int(time.mktime(datetime.strptime('3000-01-01 00:00:00.000', "%Y-%m-%d %H:%M:%S.%f").timetuple()) * 1000)
+        from upload import QiniuUpload
+        qn = QiniuUpload()
         for upkey in upkeys:
             # 去掉扩展名
             uid = future_time - int(upkey.split('.')[0])
             # 存入DB
             key = 'picbed_%s' % uid
-            # print key
-            url = config.PIC_DOMAIN + str(upkey)
+            # 获取长宽信息
+            info = qn.get_file_info(upkey)
+            data = json.loads(info)
+            width = data.get('width')
+            height = data.get('height')
+            url = config.PIC_DOMAIN + str(upkey) + '#width-' + str(width) + '-height-' + str(height)
             data = {'upkey': upkey, 'object': subject, 'words': content, 'author': author, 'url': url}
             kv.set(str(key), data)
         return 'success'

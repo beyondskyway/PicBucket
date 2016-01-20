@@ -46,6 +46,15 @@ def index():
     return redirect(url_for('pic_bed'))
 
 
+# 修改锚点位置
+def change_anchor(content, suffix):
+    data = content.split('#')
+    if len(data) == 1:
+        return content + suffix
+    else:
+        return data[0] + suffix + "#" + data[1]
+
+
 # 显示图片
 @app.route('/picbed', methods=['POST', 'GET'])
 def pic_bed():
@@ -64,8 +73,8 @@ def pic_bed():
             tmp['key'] = item[0]
             if '\x1e' in item[1]:
                 content = decode_dict(item[1])
-                # print content
-                tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+                # 修改锚点位置
+                tmp['url'] = change_anchor(content['url'], "?imageView2/2/w/400/format/jpg")
                 tmp['object'] = content['object']
                 tmp['words'] = content['words']
                 tmp['upkey'] = content['upkey']
@@ -89,8 +98,8 @@ def pic_bed():
         tmp['key'] = item[0]
         if '\x1e' in item[1]:
             content = decode_dict(item[1])
-            # print content
-            tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+            # 修改锚点位置
+            tmp['url'] = change_anchor(content['url'], "?imageView2/2/w/400/format/jpg")
             tmp['object'] = content['object']
             tmp['words'] = content['words']
             tmp['upkey'] = content['upkey']
@@ -125,8 +134,8 @@ def bucket():
             tmp['key'] = item[0]
             if '\x1e' in item[1]:
                 content = decode_dict(item[1])
-                # print content
-                tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+                # 修改锚点位置
+                tmp['url'] = change_anchor(content['url'], "?imageView2/2/w/400/format/jpg")
                 tmp['object'] = content['object']
                 tmp['words'] = content['words']
                 tmp['upkey'] = content['upkey']
@@ -150,8 +159,8 @@ def bucket():
         tmp['key'] = item[0]
         if '\x1e' in item[1]:
             content = decode_dict(item[1])
-            # print content
-            tmp['url'] = content['url'] + "?imageView2/2/w/400/format/jpg"
+            # 修改锚点位置
+            tmp['url'] = change_anchor(content['url'], "?imageView2/2/w/400/format/jpg")
             tmp['object'] = content['object']
             tmp['words'] = content['words']
             tmp['upkey'] = content['upkey']

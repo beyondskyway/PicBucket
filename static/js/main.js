@@ -4,6 +4,7 @@
 
 var col;
 var isScroll = 0;
+var conWidth;
 
 $(document).ready(function() {
 	//vendor script
@@ -13,9 +14,9 @@ $(document).ready(function() {
 	.animate({'top': 0}, 800);
 
 	//blocksit define
+    var contain = $('#contain');
 	$(window).load( function() {
         var winWidth = $(window).width();
-		var conWidth;
         if(winWidth < 500) {
 			conWidth = winWidth;
 			col = 1;
@@ -38,8 +39,8 @@ $(document).ready(function() {
             conWidth = 1862;
             col = 7;
         }
-        $('#contain').width(conWidth);
-        $("#contain").BlocksIt({
+        contain.width(conWidth);
+        contain.BlocksIt({
             numOfCol: col,
             offsetX: 8,
             offsetY: 8,
@@ -51,7 +52,6 @@ $(document).ready(function() {
 	var currentWidth = $(window).width();
 	$(window).resize(function() {
 		var winWidth = $(window).width();
-		var conWidth;
         if(winWidth < 500) {
 			conWidth = winWidth;
 			col = 1;
@@ -77,8 +77,8 @@ $(document).ready(function() {
 
 		if(conWidth != currentWidth) {
 			currentWidth = conWidth;
-			$('#contain').width(conWidth);
-            $("#contain").BlocksIt({
+			contain.width(conWidth);
+            contain.BlocksIt({
                 numOfCol: col,
                 offsetX: 8,
                 offsetY: 8,
@@ -149,6 +149,27 @@ $(window).scroll(function () {
             }
 
             $.each(pics, function(index, val){
+                var tmp = this.url.split('#');
+                var suffix;
+                if(tmp.length == 2){
+                    url_data = tmp[1].split('-');
+                    var width = url_data[1];
+                    var height = url_data[3];
+                    var item_width;
+                    if(col <= 2){
+                        item_width = parseInt(conWidth / col);
+                    } else{
+                        item_width = 250;
+                    }
+                    var item_height = parseInt(height * item_width / width);
+                    // 生成合适的url后缀
+                    suffix = "?imageView2/2/w/" + 2 * item_width +"/format/jpg";
+                }
+                else{
+                    suffix = "?imageView2/2/w/400/format/jpg";
+                }
+                var final_url = tmp[0] + suffix;
+                // 设置item长宽
                 var add =
                         "<div class='grid' data-key='" + this.key +"'>" +
                             "<div class='imgholder'>" +
@@ -436,9 +457,9 @@ function initImg(url, key, height) {
     newImg.src = url;
 }
 $('#contain').on('click', '.fopLink', function() {
-    $(this).parents('.grid').find('p').text('you are my destiny， 永远， you are my destiny， 不变， you are my everything， 只要多看你一眼， 爱你的宿命，给我再多一点点感应。');
-    $("#contain").BlocksIt();
-    return false;
+    //$(this).parents('.grid').find('p').text('you are my destiny， 永远， you are my destiny， 不变， you are my everything， 只要多看你一眼， 爱你的宿命，给我再多一点点感应。');
+    //$("#contain").BlocksIt();
+    //return false;
     var height_space = 340;
     var key = $(this).data('key');
     var height = parseInt($(this).parents('.Wrapper').find('.origin-height').text(), 10);

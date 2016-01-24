@@ -34,7 +34,7 @@
   </div>
 </nav>
 {# 内容加载 #}
-<section class="content">
+<section class="content" style="display: none">
     <div id="contain" class="contain">
         {% for item in data %}
             <div class="grid" data-key="{{ item['key'] }}">
@@ -153,47 +153,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         {# 预览弹出框 #}
-        <div class="modal fade body upload-img" id="myModal-code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close close-bg" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
-              </div>
-              <div class="modal-body">
-                  <div class="body">
-                      <div class="col-md-12 ">
-                          <ul>
-                              <li>
-                                  <input type="text" name="post_title" id="post-title" class="regular-text large" placeholder="在此输入标题" required="">
-                              </li>
-                              <li>
-                                  <textarea name="post_description" id="post_description" class="regular-text large" placeholder="在此输入图片描述 #作者#" required=""></textarea>
-                              </li>
-                              <li>
-                                  <div id="container" style="position: relative;">
-                                      <a class="upload-button" id="pickfiles" href="#">
-                                          <i class="glyphicon glyphicon-picture"></i>
-                                          <sapn>选择文件</sapn>
-                                      </a>
-                                      <div id="upload-file-list">
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="submit-block">
-                                  <input id="photo_submit" class="post-submit regular-button" type="submit" name="submit" value="确认上传">
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="modal fade body view-img" id="myModal-img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -260,7 +221,28 @@
 {#        <span id="load_text">正在加载...</span>#}
     </div>
 </section>
-{# 浮动按钮 #}
+{# 网盘文件加载 #}
+<section class="disk">
+    <div class="">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <ol class="breadcrumb">
+                    <li><a href="">全部文件</a></li>
+                    <li><a href="">返回上一级</a></li>
+                    <li class="active">SkyWatcher</li>
+                </ol>
+            </li>
+            <li class="collection-item avatar">
+                <i class="material-icons circle">folder</i>
+                <div class="row file-info">
+                    <div class="col s7 file-link"><a>afjlshelwf;kwelrwruwi</a></div>
+                    <div class="col s2 file-size">100M</div>
+                    <div class="col s3 file-time">2016-01-22 23:01:32</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
 <section>
 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red">

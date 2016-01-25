@@ -8,7 +8,7 @@ from myapp import app, kv
 import config
 import json
 from functools import wraps
-from upload import get_token, del_pic
+from upload import get_token, del_pic, QiniuUpload
 from kvdb_module import decode_dict
 import qiniu
 
@@ -238,3 +238,16 @@ def delQiniu():
         upkey = request.form.get('key')
         ret, info = del_pic(upkey)
         return 'success'
+
+
+# 显示文件
+@app.route('/files', methods=['GET', 'POST'])
+def file_view():
+    get_top_folder(None)
+    return 'success'
+
+
+# 提取顶级文件夹
+def get_top_folder(prefix):
+    qn = QiniuUpload(config.DISK_BUCKET, config.DISK_DOMAIN)
+    qn.list_all(prefix=None, limit=None)

@@ -55,3 +55,16 @@ class QiniuUpload():
         except Exception, e:
             print e
             return None
+
+    def list_all(self, prefix=None, limit=None):
+        marker = None
+        eof = False
+        while eof is False:
+            ret, eof, info = self.bucket_manager.list(self.bucket, prefix=prefix, marker=marker, limit=limit)
+            marker = ret.get('marker', None)
+            for item in ret['items']:
+                print(item['key'])
+                pass
+        if eof is not True:
+            # 错误处理
+            pass

@@ -250,4 +250,22 @@ def file_view():
 # 提取顶级文件夹
 def get_top_folder(prefix):
     qn = QiniuUpload(config.DISK_BUCKET, config.DISK_DOMAIN)
-    qn.list_all(prefix=None, limit=None)
+    files_info = qn.list_all(prefix=prefix, limit=None)
+    # 提取顶级文件夹
+    top_folders = set([])
+    top_files = set([])
+    for item in files_info:
+        key = (item['key'].split(prefix))[1]
+        folder_name = key.split('/')[0]
+        # 是否是文件夹
+        if folder_name is not None:
+            top_folders.add(folder_name)
+        else:
+            top_files.add(key)
+    for i in top_folders:
+        print i
+    for i in top_files:
+        print i
+
+    # for item in files_info:
+    #     print "type:%s path:%s size:%s time:%s" % (item['mimeType'], item['fsize'], item['key'], item['putTime'])

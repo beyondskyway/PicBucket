@@ -17,6 +17,9 @@ PIC_BUCKET = 'bucket-name'
 # 七牛域名
 PIC_DOMAIN = 'domain-url'
 
+# 网盘存储空间及域名
+DISK_BUCKET = 'bucket-name'
+DISK_DOMAIN = 'domain-url'
 
 # MYSQL配置信息
 MYSQL_USER = ''

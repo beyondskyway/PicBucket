@@ -1,16 +1,15 @@
 # -*- coding:utf8 -*-
 __author__ = 'Sky'
 
-
+import json
 from datetime import datetime
 from flask import render_template, request, jsonify, make_response, redirect, url_for
-from myapp import app, kv
-import config
-import json
 from functools import wraps
-from upload import get_token, del_pic, QiniuUpload
+
+import config
 from kvdb_module import decode_dict
-import qiniu
+from myapp import app, kv
+from upload import get_token, del_pic, QiniuUpload
 
 
 # 允许跨域请求
@@ -243,28 +242,51 @@ def delQiniu():
 # 显示文件
 @app.route('/files', methods=['GET', 'POST'])
 def file_view():
-    get_top_folder(None)
+    get_top_folder('SkyWatcher/Document/')
     return 'success'
 
 
-# 提取顶级文件夹
+# 提取文件夹及文件信息
 def get_top_folder(prefix):
     qn = QiniuUpload(config.DISK_BUCKET, config.DISK_DOMAIN)
     files_info = qn.list_all(prefix=prefix, limit=None)
     # for item in files_info:
     #     print "type:%s size:%s path:%s time:%s" % (item['mimeType'], item['fsize'], item['key'], item['putTime'])
     # 提取顶级文件夹
-    top_folders = set([])
-    top_files = set([])
+    folders = set([])
+    top_folders = []
+    top_files = []
+    json_data = []
+    from myapp.common import get_nice_filesize, stamp_to_string
     for item in files_info:
+        tmp = {}
         key = item['key'].replace(prefix, '', 1)
         path = key.split('/')
-        # 是否是文件夹
+        # 文件
         if len(path) == 1:
-            top_files.add(key)
+            # top_files.add(key)
+            tmp['type'] = 'file'
+            tmp['name'] = key
+            size = get_nice_filesize(int(item['fsize']))
+            tmp['size'] = size
+            # 17位时间戳
+            put_time = stamp_to_string(item['putTime'])
+            tmp['time'] = put_time
+            top_files.append(tmp)
+        # 文件夹
         else:
-            top_folders.add(path[0])
+            if path[0] not in folders:
+                tmp['type'] = 'folder'
+                tmp['name'] = path[0]
+                top_folders.append(tmp)
+                folders.add(path[0])
     for i in top_folders:
-        print i
-    for i in top_files:
-        print i
+        json_data.append(i)
+    for j in top_files:
+        json_data.append(j)
+    print json_data
+    for i in json_data:
+        if i['type'] == 'file':
+            print "name:%s size:%s time:%s" % (i['name'], i['size'], i['time'])
+        else:
+            print "name:%s" % i['name']

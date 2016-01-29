@@ -19,22 +19,23 @@
   <li><a href="#">退 出</a></li>
   <li><a id="about_me" href="#">关 于</a></li>
 </ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">
-        <img class="logo_img" src="/static/img/logo.jpg">
-        <p>PicBucket</p>
-    </a>
-    <ul class="right hide-on-med-and-down">
-      <li class="active"><a class="nav_active" href="">图 床</a></li>
-      <li><a href="">美 图</a></li>
-      <li><a href="">API</a></li>
-      <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
+<nav id="main-nav">
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">
+            <img class="logo_img" src="/static/img/logo.jpg">
+            <p>PicBucket</p>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li id="picbed" class="active"><a class="nav_active" href="">图 床</a></li>
+            <li><a href="">美 图</a></li>
+            <li id="file"><a href="">云 盘</a></li>
+            <li><a href="">API</a></li>
+            <li><a class="dropdown-button" href="#" data-activates="dropdown_menu">SkyWatcher<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+    </div>
 </nav>
 {# 内容加载 #}
-<section class="content" style="display: none">
+<section id="pics" class="content" style="display: none">
     <div id="contain" class="contain">
         {% for item in data %}
             <div class="grid" data-key="{{ item['key'] }}">
@@ -222,7 +223,7 @@
     </div>
 </section>
 {# 网盘文件加载 #}
-<section class="disk">
+<section id="files" class="disk">
     <div class="">
         <ul class="collection with-header">
             <li class="collection-header">

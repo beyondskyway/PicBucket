@@ -332,7 +332,35 @@ $(function() {
 
     $('#about_mobile_close').on('click', function(){
         $("#about_modal").hide();
-        tos
+    });
+
+    // 请求文件信息
+    var load_files = function (prefix){
+        $.ajax({
+            url:"/files",
+            type: "POST",
+            data: { prefix: prefix}
+        })
+        .done(function(data){
+            if(data === 'error') {
+                console.log('load error');
+            }
+            // 更换路径
+            // 加载页面
+        });
+    };
+
+    //加载云盘文件
+    $('#file').on('click', function(){
+        $('#pics').hide();
+        load_files('');
+    });
+
+    // 导航显示
+    $('#main-nav li').click(function(e) {
+        e.preventDefault();
+        $('li').removeClass('active');
+        $(this).addClass('active');
     });
 
     var getRotate = function(url) {
